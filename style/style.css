@@ -1,0 +1,185 @@
+:root {
+    --bg: #0D0F26;
+    --card: #1A1D3A;
+    --accent: #6A4CFF;
+    --accent2: #8A6CFF;
+    --text: #E4E7FF;
+    --text-secondary: #9CA3C7;
+    --radius: 14px;
+}
+
+body {
+    background: var(--bg);
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    color: var(--text);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    padding-bottom: 100px; /* Трохи збільшено під меню */
+}
+
+/* ======= HEADER ======= */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.header-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header .logo {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* ======= КАРТКИ ======= */
+.card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* ======= ФОРМИ ======= */
+select, .input-main {
+    width: 100%;
+    padding: 12px;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid #2C2F4A;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+/* ======= ВЕЛИКІ КНОПКИ ВИБОРУ ======= */
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.big-btn {
+    width: 100%;
+    padding: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.big-btn:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+/* Кнопка активного тренування */
+.active-workout-btn {
+    border: 2px solid var(--accent) !important;
+    background: linear-gradient(135deg, var(--card), #252a41) !important;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.01); } /* Зменшив амплітуду, щоб не "пливло" */
+    100% { transform: scale(1); }
+}
+
+/* ======= НИЖНЄ МЕНЮ ======= */
+.menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #12142d; 
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu a {
+    flex: 1;
+    max-width: 120px;
+    text-decoration: none;
+}
+
+.menu button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 13px;
+    background: var(--card); 
+    color: var(--text);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu button:hover, .menu button.active {
+    background: var(--accent); 
+    color: #ffffff;
+}
+/* календарь */
+/* Базовий стиль клітинки */
+#calendar td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%; /* Робимо всі активні елементи круглими */
+    transition: 0.3s;
+    position: relative;
+}
+
+/* ТІЛЬКИ сьогодні (Фіолетовий) */
+#calendar td.active {
+    background-color: var(--accent) !important; /* Твій фіолетовий #6c63ff */
+    color: white !important;
+}
+
+/* ТІЛЬКИ тренування (Зелений) */
+#calendar td.workout-done {
+    background-color: #2ecc71 !important;
+    color: white !important;
+}
+
+/* І сьогодні, І тренування (Половина на половину) */
+#calendar td.active.workout-done {
+    background: linear-gradient(135deg, var(--accent) 50%, #2ecc71 50%) !important;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+/* Прибираємо стандартну обводку, якщо вона була, щоб градієнт виглядав чистим */
+#calendar td.active:not(.workout-done) {
+    border: none;
+}

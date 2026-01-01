@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створити тренування — SportForYou</title>
+     <link rel="icon" type="image/png" href="image/AvatarBot.png">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/create-training.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon"><img src="image/AvatarBot.png"></div>
+            <span class="logo">SportForYou</span>
+        </div>
+
+       <div class="card training-card">
+    <h2>Нове тренування</h2>
+    
+    <div class="input-group">
+        <label>Назва тренування</label>
+        <input type="text" id="workout-name" class="input-main" placeholder="Наприклад: Ноги + Прес">
+    </div>
+
+    <div class="input-group-row">
+        <div class="input-subgroup">
+            <label>Підходи</label>
+            <input type="number" id="sets" class="input-small" placeholder="0">
+        </div>
+        <div class="input-subgroup">
+            <label>Повторення</label>
+            <input type="number" id="reps" class="input-small" placeholder="0">
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Група м'язів</label>
+        <select id="muscle-group" class="input-main" onchange="updateExercises()">
+            <option value="" disabled selected>Оберіть групу...</option>
+            <option value="chest">Груди</option>
+            <option value="back">Спина</option>
+            <option value="biceps">Біцепс</option>
+            <option value="triceps">Трицепс</option>
+            <option value="shoulders">Плечі</option>
+            <option value="legs">Ноги</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Вправа</label>
+        <select id="exercise-list" class="input-main">
+            <option value="" disabled selected>Спочатку оберіть групу</option>
+        </select>
+    </div>
+
+    <button class="main-btn" onclick="addExercise()">Додати вправу</button>
+</div>
+
+        <div class="workout-summary">
+            <h3>Ваш план:</h3>
+            <ul id="selected-exercises-list">
+                </ul>
+        </div>
+<button class="main-btn" onclick="finishWorkout()" style="background: #2ecc71;">Зберегти тренування</button>
+        <div class="footer">
+    <a href="Main.html"><button>Головна</button></a>
+    <a href="Create_training.html"><button class="active">Тренування</button></a>
+    <a href="stats.html"><button>Статистика</button></a>
+    <a href="profile.html"><button>Профіль</button></a>
+</div>
+
+    <script src="script/createTraining.js"></script>
+</body>
+</html>

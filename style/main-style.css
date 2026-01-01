@@ -1,0 +1,210 @@
+:root {
+    --bg: #0d0f1a;
+    --card: #1a1c2c;
+    --accent: #6c63ff;
+    --accent-soft: #554ee4;
+    --text: #e4e6f0;
+    --text-dim: #a7a9c4;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР САЙТА ===== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===== HEADER ===== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.header-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+/* ===== PROFILE ===== */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--card);
+    padding: 16px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 70px;
+    height: 70px;
+    background-color: var(--accent-soft);
+    border-radius: 50%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.info .name {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.info .activity {
+    color: var(--text-dim);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* ВЕЛИКЕ фото */
+.GYM-image {
+    width: 200%;
+    max-width: 1100px;
+    height: 300px;
+    object-fit: cover;   
+    background-color: var(--card);
+
+    border-radius: 14px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ===== ЦИТАТЫ ===== */
+.quotes {
+    grid-column: 1 / 2; 
+    margin-top: 10px;
+    background-color: var(--accent-soft);
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    position: relative;
+    border-left: 4px solid #3390ec; 
+}
+
+
+#quote-text {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Roboto', sans-serif;
+    color: var(--tg-theme-text-color, #000);
+    padding: 0 15px;
+    text-align: center;
+    width: 100%;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+.slide-out {
+    opacity: 0 !important;
+    transform: translateX(-100%) !important; 
+}
+
+.slide-prepare {
+    opacity: 0 !important;
+    transform: translateX(100%) !important; 
+}
+
+.gallery {
+    width: 100%; 
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 12px;
+    margin-top: 20px;
+    box-sizing: border-box; 
+}
+
+
+.small-image {
+    height: 180px;
+    background-color: #ffffff !important; 
+    border-radius: 20px;                   
+    overflow: hidden;                      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eeeeee;           
+    padding: 10px;                       
+    box-sizing: border-box;
+}
+
+.small-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;                   
+    border-radius: 15px;                  
+    transition: opacity 0.5s ease-in-out;
+}
+
+
+/* ======= НИЖНЄ МЕНЮ  ======= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    background: #12142d; 
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)); 
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Кнопки меню всередині footer */
+.footer a {
+    flex: 1;
+    max-width: 120px;
+    text-decoration: none;
+}
+
+.footer button {
+    width: 100%; 
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--card); 
+    color: var(--text);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Ефект при наведенні */
+.footer button:hover {
+    background: var(--accent); 
+    color: #ffffff;
+    transform: translateY(-2px); 
+}

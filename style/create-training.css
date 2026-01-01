@@ -1,0 +1,159 @@
+/* ======= ОСНОВНІ КАРТКИ ======= */
+.training-card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+}
+
+.workout-summary {
+    background: rgba(28, 31, 46, 0.5);
+    border-radius: var(--radius);
+    padding: 15px;
+    margin-bottom: 100px; /* Більший відступ для футера */
+}
+
+/* ======= СТИЛІ ПОЛІВ ВВОДУ (ОНОВЛЕНО) ======= */
+/* Стиль для назви, селектів та цифр */
+.input-main, .input-small, select.input-main {
+    width: 100%;
+    padding: 10px 12px; 
+    background: #0d0f1a; /* Темніший фон для контрасту */
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+/* Спеціально для полів Підходи/Повторення */
+.input-small {
+    text-align: center;
+    padding: 10px 5px;
+}
+
+.input-main:focus, .input-small:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.2);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: #c9c9ff;
+    margin-bottom: 6px;
+    margin-left: 2px;
+}
+
+/* Ряд для Підходів та Повторень */
+.input-group-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.input-subgroup {
+    flex: 1;
+}
+
+/* ======= СПИСОК ДОДАНИХ ВПРАВ ======= */
+.exercise-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1c1f2e;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+}
+
+.exercise-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ex-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 15px;
+}
+
+.ex-details {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 3px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #ff4d4d;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* ======= КНОПКИ ======= */
+.main-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: white;
+    border-radius: var(--radius);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.main-btn:active {
+    transform: scale(0.98);
+}
+
+/* ======= НИЖНЄ МЕНЮ ======= */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #12142d;
+    padding: 12px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.footer a {
+    flex: 1;
+    max-width: 120px;
+    text-decoration: none;
+}
+
+.footer button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--card);
+    color: var(--text);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.footer button.active {
+    background: var(--accent);
+    color: #ffffff;
+}
