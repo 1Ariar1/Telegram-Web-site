@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyC1FDqj5ub8zSP4Sb63ugK0zhr33qP-yrc'; 
+const API_KEY = 'AIzaSyANCxDaaBGnVz6Zyf5Mg_DGL5Qt5yzW-pQ'; 
 
 document.addEventListener('DOMContentLoaded', function() {
     const tg = window.Telegram.WebApp;
