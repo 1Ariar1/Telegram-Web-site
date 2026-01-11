@@ -96,7 +96,7 @@ function finishWorkout() {
         return;
     }
 
-    // Зберігаємо нове тренування (isCompleted за замовчуванням false або просто відсутнє)
+    // Зберігаємо нове тренування 
     const workoutData = { 
         name: workoutName, 
         exercises: exercises, 

@@ -1,5 +1,4 @@
 /* ======= ЗАГАЛЬНІ СТИЛІ ПОЛІВ ВВОДУ ======= */
-/* Об'єднуємо всі типи в один блок, щоб не дублювати padding, border та кольори */
 input[type="text"], 
 input[type="number"], 
 select {
@@ -23,7 +22,6 @@ select:focus {
     box-shadow: 0 0 8px rgba(106, 76, 255, 0.2);
 }
 
-/* Прибираємо стрілочки в полях типу number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -56,7 +54,7 @@ input[type=number] {
 .header {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Вирівнювання вліво для стабільності дизайну */
+    justify-content: flex-start; 
     gap: 10px;
     margin-bottom: 30px;
 }
@@ -64,7 +62,7 @@ input[type=number] {
 .header-icon {
     width: 36px;
     height: 36px;
-    background: var(--accent); /* Спростив, щоб не плодити змінні типу accent-dark */
+    background: var(--accent); 
     border-radius: 50%;
     overflow: hidden;
     display: flex;

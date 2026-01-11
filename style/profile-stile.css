@@ -33,7 +33,7 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Вирівнювання ліворуч як на фото */
+    justify-content: flex-start; 
     gap: 10px;
     font-size: 18px;
     font-weight: 600;
@@ -42,7 +42,7 @@ body {
 }
 
 .bot-logo {
-    width: 32px !important; /* Маленький розмір лого бота */
+    width: 32px !important; 
     height: 32px !important;
     border-radius: 50%;
     object-fit: cover;
@@ -63,12 +63,10 @@ body {
     width: 60px !important;
     height: 60px !important;
     border-radius: 50%;
-    object-fit: cover; /* Это важно для корректного отображения фото из ТГ */
+    object-fit: cover; 
     flex-shrink: 0;
     border: 2px solid var(--accent);
 }
-
-/* ... твій попередній код ... */
 
 #avatar-container {
     position: relative;
@@ -176,7 +174,7 @@ body {
 
 /* ===== ПРІОРІТЕТНИЙ ВІДСТУП ЗНИЗУ ===== */
 .spacer {
-    height: 100px; /* Створює місце, щоб кнопки не ховалися під меню */
+    height: 100px; 
     width: 100%;
 }
 

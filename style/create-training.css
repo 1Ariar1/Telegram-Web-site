@@ -14,7 +14,7 @@
 }
 
 /* ======= СТИЛІ ПОЛІВ ВВОДУ (ОНОВЛЕНО) ======= */
-/* Стиль для назви, селектів та цифр */
+
 .input-main, .input-small, select.input-main {
     width: 100%;
     padding: 10px 12px; 

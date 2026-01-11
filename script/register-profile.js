@@ -43,10 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nameElement = document.getElementById('display-name');
     const avatarContainer = document.getElementById('avatar-container');
 
-    // Пріоритет завантаження фото:
-    // 1. Ручне фото з localStorage
-    // 2. Фото з Telegram
-    // 3. Літера імені (якщо фото немає)
+    
     
     const savedPhoto = localStorage.getItem('userCustomPhoto');
     const firstName = user?.first_name || localStorage.getItem('userName') || "Користувач";

@@ -19,7 +19,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 24px;
-    padding-bottom: 100px; /* Трохи збільшено під меню */
+    padding-bottom: 100px; 
 }
 
 /* ======= HEADER ======= */
@@ -107,7 +107,7 @@ select, .input-main {
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.01); } /* Зменшив амплітуду, щоб не "пливло" */
+    50% { transform: scale(1.01); } 
     100% { transform: scale(1); }
 }
 
@@ -148,21 +148,20 @@ select, .input-main {
     background: var(--accent); 
     color: #ffffff;
 }
-/* календарь */
-/* Базовий стиль клітинки */
+
 #calendar td {
     width: 40px;
     height: 40px;
     text-align: center;
     vertical-align: middle;
-    border-radius: 50%; /* Робимо всі активні елементи круглими */
+    border-radius: 50%; 
     transition: 0.3s;
     position: relative;
 }
 
 /* ТІЛЬКИ сьогодні (Фіолетовий) */
 #calendar td.active {
-    background-color: var(--accent) !important; /* Твій фіолетовий #6c63ff */
+    background-color: var(--accent) !important; 
     color: white !important;
 }
 
