@@ -1,61 +1,55 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Ініціалізація Telegram та Аватара (як у Main.html)
-    const tg = window.Telegram.WebApp;
-    const user = tg.initDataUnsafe?.user;
-    const mainAvatar = document.getElementById('main-avatar');
+const API_KEY = 'AIzaSyC1FDqj5ub8zSP4Sb63ugK0zhr33qP-yrc'; // Отримай на https://aistudio.google.com/
 
-    if (mainAvatar) {
-        const savedPhoto = localStorage.getItem('userCustomPhoto');
-        if (savedPhoto) {
-            mainAvatar.src = savedPhoto;
-        } else if (user && user.photo_url) {
-            mainAvatar.src = user.photo_url;
-        }
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const tg = window.Telegram.WebApp;
+    const mainAvatar = document.getElementById('main-avatar');
+    
+    // Синхронізація аватара
+    const savedPhoto = localStorage.getItem('userCustomPhoto');
+    if (savedPhoto) mainAvatar.src = savedPhoto;
+    else if (tg.initDataUnsafe?.user?.photo_url) mainAvatar.src = tg.initDataUnsafe.user.photo_url;
+    
     tg.ready();
 });
 
-// 2. Функція генерації (Логіка AI Конструктора)
-function startGeneration() {
+async function generateWithAI() {
     const goal = document.getElementById('ai-goal').value;
+    const level = document.getElementById('ai-level').value;
     const place = document.getElementById('ai-place').value;
+    
+    const btn = document.getElementById('gen-btn');
     const resultBox = document.getElementById('result-box');
     const resultText = document.getElementById('result-text');
+    const spinner = document.getElementById('loading-spinner');
 
-    // Ефект завантаження
+    // Налаштування інтерфейсу
+    btn.disabled = true;
     resultBox.style.display = "block";
-    resultText.innerText = "Аналізую ваші дані... 🧠";
+    spinner.style.display = "block";
+    resultText.innerText = "";
 
-    setTimeout(() => {
-        let plan = "";
+    const prompt = `Склади тренування для користувача. Ціль: ${goal}. Рівень складності: ${level}. Місце: ${place}. 
+    Напиши список з 5 вправ, кількість підходів та повторень. Пиши українською мовою.`;
 
-        if (goal === "схуднення") {
-            plan = "🔥 ПЛАН ДЛЯ СХУДНЕННЯ (" + place + "):\n" +
-                   "1. Берпі: 3 підходи по 12 разів\n" +
-                   "2. Стрибки 'Джампінг Джек': 4 х 45 сек\n" +
-                   "3. Планка: 3 х 1 хв\n" +
-                   "4. Біг на місці: 5 хв";
-        } else if (goal === "набір маси") {
-            plan = "💪 ПЛАН ДЛЯ МАСИ (" + place + "):\n" +
-                   "1. Присідання: 4 підходи по 10 разів\n" +
-                   "2. Віджимання (широко): 3 х 15\n" +
-                   "3. Випади: 3 х 12 на кожну ногу\n" +
-                   "4. Зворотні віджимання: 3 х 12";
-        } else {
-            plan = "⚡ ПЛАН НА ВИТРИВАЛІСТЬ (" + place + "):\n" +
-                   "1. Скручування на прес: 3 х 25\n" +
-                   "2. Альпініст (Mountain Climber): 4 х 40 сек\n" +
-                   "3. Скакалка (або імітація): 5 хв\n" +
-                   "4. Човниковий біг: 3 х 30 сек";
-        }
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }]
+            })
+        });
 
-        resultText.innerText = plan;
-    }, 1500); // Імітація роздумів AI
-}
-
-// 3. Збереження результату
-function saveToHistory() {
-    const plan = document.getElementById('result-text').innerText;
-    alert("Тренування збережено в історію!");
-    // Тут можна додати запис у localStorage історії
+        const data = await response.json();
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        
+        spinner.style.display = "none";
+        resultText.innerText = aiResponse;
+    } catch (error) {
+        spinner.style.display = "none";
+        resultText.innerText = "Помилка зв'язку з AI. Перевір API Key або інтернет.";
+        console.error(error);
+    } finally {
+        btn.disabled = false;
+    }
 }
