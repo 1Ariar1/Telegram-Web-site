@@ -19,13 +19,14 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== ОСНОВНИЙ КОНТЕЙНЕР (АДАПТИВНІ ВІДСТУПИ) ===== */
+/* ===== КОНТЕЙНЕР (ГОЛОВНИЙ ФІКС) ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    /* Відступ знизу, щоб контент не перекривався футером */
-    padding-bottom: 90px; 
+    /* Цей відступ автоматично створює місце під останньою кнопкою,
+       щоб вона не заходила під навігацію */
+    padding-bottom: 100px; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -44,62 +45,31 @@ body {
     margin-bottom: 25px;
 }
 
-.header-icon {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.header-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* ===== PROFILE (АДАПТИВНИЙ) ===== */
+/* ===== PROFILE SECTION ===== */
 .profile {
     display: flex;
-    flex-direction: column; /* Для мобільних пристроїв краще вертикально */
+    gap: 20px;
     align-items: center;
-    gap: 15px;
-    background: var(--card);
-    padding: 20px;
-    border-radius: var(--radius);
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-/* На планшетах та ПК повертаємо в ряд */
-@media (min-width: 480px) {
-    .profile {
-        flex-direction: row;
-        text-align: left;
-    }
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 .avatar-profile {
-    width: 100px;
-    height: 100px;
-    aspect-ratio: 1 / 1;
+    width: 80px;
+    height: 80px;
     background: linear-gradient(145deg, var(--accent-dark), var(--accent));
     border-radius: 50%;
     flex-shrink: 0;
-    object-fit: cover;
 }
 
 .info-profile {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
 }
 
 .info-profile div {
-    font-size: 16px;
+    margin-bottom: 4px;
 }
 
 .info-profile strong {
@@ -107,77 +77,57 @@ body {
 }
 
 .info-profile span {
-    color: var(--text);
+    color: #fff;
     font-weight: 500;
-    margin-left: 5px;
 }
 
-/* ===== CARD ===== */
-.card {
-    background: var(--card);
-    padding: 16px;
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-}
-
-/* ===== SELECT BOX (АДАПТИВНИЙ) ===== */
-.select-box {
-    width: 100%;
-    margin-bottom: 12px;
-}
-
-.select-box select {
-    width: 100%;
-    padding: 14px 16px;
+/* ===== DATE SELECTOR ===== */
+.date-box {
     background-color: var(--card);
-    color: var(--text);
-    border: 1px solid rgba(108, 99, 255, 0.3);
+    height: 45px;
     border-radius: var(--radius);
-    font-size: 15px;
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c63ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
 }
 
-/* ===== MENU BUTTONS ===== */
+/* ===== MENU LIST (Кнопки як у Minecraft) ===== */
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .menu a {
-    width: 100%;
     text-decoration: none;
+    width: 100%;
 }
 
 .menu-btn {
     width: 100%;
     background: var(--card);
-    border: 1px solid rgba(108, 99, 255, 0.1);
+    border: none;
     border-radius: var(--radius);
-    padding: 14px;
+    padding: 15px;
     color: var(--text);
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.2s;
     text-align: center;
     box-sizing: border-box;
     display: block;
 }
 
-.menu-btn:hover {
-    background: #262b3f;
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-1px);
+.menu-btn:active {
+    background: var(--accent-dark);
+    transform: scale(0.98); /* Ефект натискання */
 }
 
-/* ======= НИЖНЄ МЕНЮ (FOOTER) ======= */
+/* ======= НИЖНЯ ПАНЕЛЬ (FOOTER) ======= */
 .footer {
     position: fixed;
     bottom: 0;
@@ -186,6 +136,7 @@ body {
     z-index: 1000;
     background: #12142d;
     padding: 12px 16px;
+    /* Додаємо підтримку відступу для iPhone (Safe Area) */
     padding-bottom: max(12px, env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
@@ -193,26 +144,13 @@ body {
     box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.footer a {
+.footer button {
     flex: 1;
     max-width: 120px;
-    text-decoration: none;
-}
-
-.footer button {
-    width: 100%;
     padding: 10px 0;
-    font-size: 13px;
-    font-weight: 500;
-    background: var(--card);
-    color: var(--text);
-    border-radius: 12px;
+    background: #1c1f2e;
+    color: #fff;
+    border-radius: 10px;
     border: none;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.footer button:hover {
-    background: var(--accent);
-    color: #ffffff;
+    font-size: 13px;
 }
