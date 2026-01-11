@@ -20,6 +20,8 @@ body {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
+    padding-bottom: 100px; 
+    box-sizing: border-box;
 }
 
 /* ===== HEADER ===== */
@@ -79,17 +81,16 @@ body {
     align-items: start;
 }
 
-/* ВЕЛИКЕ фото */
-.GYM-image {
-    width: 200%;
-    max-width: 1100px;
-    height: 300px;
-    object-fit: cover;   
-    background-color: var(--card);
 
+.GYM-image {
+    width: 100%;             
+    max-width: 100%;        
+    height: auto;            
+    aspect-ratio: 16 / 7;   
+    object-fit: cover;   
     border-radius: 14px;
     display: block;
-    margin: 0 auto;
+    margin: 10px 0 20px 0;
 }
 
 /* ===== ЦИТАТЫ ===== */
@@ -109,9 +110,9 @@ body {
 
 
 #quote-text {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: 'Roboto', sans-serif;
-    color: var(--tg-theme-text-color, #000);
+    color: white; 
     padding: 0 15px;
     text-align: center;
     width: 100%;
@@ -131,27 +132,25 @@ body {
 }
 
 .gallery {
-    width: 100%; 
-    max-width: 100%;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
     gap: 12px;
     margin-top: 20px;
-    box-sizing: border-box; 
+    padding-bottom: 120px;
 }
 
 
 .small-image {
-    height: 180px;
-    background-color: #ffffff !important; 
-    border-radius: 20px;                   
-    overflow: hidden;                      
+    width: 100%;
+    height: auto;           /* Дозволяємо висоті бути гнучкою */
+    aspect-ratio: 1 / 1;    /* Гіфки будуть квадратами */
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #eeeeee;           
-    padding: 10px;                       
-    box-sizing: border-box;
 }
 
 .small-image img {
