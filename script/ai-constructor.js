@@ -92,13 +92,15 @@ async function generateWithAI() {
 function saveAiWorkoutToSystem() {
     if (!currentGeneratedWorkout) return;
 
-    // Ключ має збігатися з Create_training.html
     const STORAGE_KEY = 'userWorkouts'; 
-
     let allWorkouts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    
+    // Додаємо статус, щоб save-train.js його бачив
+    currentGeneratedWorkout.isCompleted = false; 
+    
     allWorkouts.push(currentGeneratedWorkout);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(allWorkouts));
     
-    alert("Тренування успішно створено!");
+    alert("AI тренування збережено!");
     window.location.href = 'Create_training.html'; 
 }
