@@ -9,14 +9,17 @@
     --radius: 12px;
 }
 
+/* ===== ЗАГАЛЬНІ НАЛАШТУВАННЯ ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     background-color: var(--bg);
     margin: 0;
     padding: 0;
     color: var(--text);
+    overflow-x: hidden;
 }
 
+/* ===== КОНТЕЙНЕР ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -26,56 +29,66 @@ body {
     box-sizing: border-box;
 }
 
-/* HEADER */
+/* ===== ШАПКА (HEADER) — ЯК НА ВСІХ СТОРІНКАХ ===== */
 .header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Вирівнювання ліворуч як на фото */
     gap: 10px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--text);
     margin-bottom: 25px;
 }
 
-.header-icon img {
-    width: 36px;
-    height: 36px;
+.bot-logo {
+    width: 32px !important; /* Маленький розмір лого бота */
+    height: 32px !important;
     border-radius: 50%;
+    object-fit: cover;
 }
 
-/* PROFILE SECTION */
+/* ===== СЕКЦІЯ ПРОФІЛЮ (АВАТАР ТА ІНФО) ===== */
 .profile-section {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     background: var(--card);
-    padding: 16px;
+    padding: 15px;
     border-radius: var(--radius);
     margin-bottom: 20px;
 }
 
 .avatar-profile {
-    width: 80px !important;  /* Жорсткий розмір */
-    height: 80px !important; /* Жорсткий розмір */
-    max-width: 80px;
-    max-height: 80px;
+    width: 60px !important; /* Фіксований невеликий розмір аватара */
+    height: 60px !important;
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0; /* Щоб не стискалася */
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    flex-shrink: 0; /* Щоб не стискався */
     border: 2px solid var(--accent);
 }
 
-.info-profile p {
-    margin: 5px 0;
-    font-size: 15px;
+.info-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.info-profile strong { color: var(--accent); }
-.info-profile span { color: var(--text); font-weight: 500; }
+.info-profile p {
+    margin: 0;
+    font-size: 14px;
+}
 
-/* DATE BOX */
+.info-profile strong {
+    color: var(--accent);
+}
+
+.info-profile span {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* ===== БЛОК ДАТИ ===== */
 .date-box {
     background-color: var(--card);
     height: 45px;
@@ -85,28 +98,48 @@ body {
     align-items: center;
     padding: 0 15px;
     margin-bottom: 20px;
+    font-size: 14px;
 }
 
-/* MENU */
+.arrow {
+    color: var(--accent);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ===== МЕНЮ ТА КНОПКИ ===== */
 .menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+.menu a {
+    text-decoration: none;
+    width: 100%;
+}
+
 .menu-btn, .select-box select {
     width: 100%;
     background: var(--card);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 14px;
     color: var(--text);
     font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
     text-align: center;
     box-sizing: border-box;
+    display: block;
+    transition: background 0.2s;
 }
 
+.menu-btn:active {
+    background: var(--accent-dark);
+}
+
+/* ===== СЕЛЕКТИ (ВИБІР МОВИ ТА ДРУЗІ) ===== */
 .select-box select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c63ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
@@ -114,13 +147,13 @@ body {
     background-position: right 15px center;
 }
 
-/* SPACER ДЛЯ ВІДСТУПУ */
+/* ===== ПРІОРІТЕТНИЙ ВІДСТУП ЗНИЗУ ===== */
 .spacer {
-    height: 100px;
+    height: 100px; /* Створює місце, щоб кнопки не ховалися під меню */
     width: 100%;
 }
 
-/* FOOTER */
+/* ===== НИЖНЯ НАВІГАЦІЯ (FOOTER) ===== */
 .footer {
     position: fixed;
     bottom: 0;
@@ -129,24 +162,30 @@ body {
     z-index: 1000;
     background: #12142d;
     padding: 12px 16px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.footer a {
+    flex: 1;
+    max-width: 110px;
+    text-decoration: none;
 }
 
 .footer button {
-    flex: 1;
+    width: 100%;
     padding: 10px 0;
-    background: var(--card);
-    color: var(--text);
+    background: #1c1f2e;
+    color: #fff;
     border-radius: 10px;
     border: none;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .footer button.active {
-    background: var(--accent);
-    color: white;
+    background: var(--accent) !important;
 }
