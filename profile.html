@@ -10,62 +10,49 @@
 
 <body>
     <div class="container">
-
-        <div class="header">
-            <div class="header-icon">
-                <img src="image/AvatarBot.png" alt="Logo">
-            </div>
-            SportForYou
-        </div>
-
-        <div class="info-profile">
-            <p><strong>Ім'я:</strong> <span id="display-name"></span></p>
-            <p><strong>Вік:</strong> <span id="display-age"></span></p>
-            <p><strong>Стать:</strong> <span id="display-gender"></span></p>
-            <p><strong>Вага:</strong> <span id="display-weight"></span> кг</p>
-            <p><strong>Роль:</strong> <span id="display-activity"></span></p>
-        </div>
-
-        <a href="calendar.html" style="text-decoration: none; color: inherit;">
-            <div class="date-box">
-                <span class="arrow">&lt;</span>
-                <span id="current-date">Завантаження...</span>
-                <span class="arrow">&gt;</span>
-            </div>
-        </a>
-
-        <div class="menu">
-            <a href="History_Training.html">
-                <button class="menu-btn">Історія тренувань</button>
-            </a>
-
-            <div class="select-box">
-                <select id="invite-select" onchange="handleInvite(this)">
-                    <option selected disabled>Запросіть друзів</option>
-                    <option value="@YourSportsTraining_bot">Поділитись посиланням</option>
-                </select>
-            </div>
-
-            <button class="menu-btn">Політика конфіденційності</button>
-            <button class="menu-btn">Умови використання</button>
-
-            <div class="select-box">
-                <select id="language-select">
-                    <option value="" disabled selected>Мова</option>
-                    <option value="uk">Українська</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="spacer"></div>
-
-    </div> <div class="footer">
-        <a href="Main.html"><button>Головна</button></a>
-        <a href="Create_training.html"><button>Тренування</button></a>
-        <a href="stats.html"><button>Статистика</button></a>
-        <a href="profile.html"><button style="background: var(--accent); color: white;">Профіль</button></a>
+    <div class="header">
+        <div class="header-icon"><img src="image/AvatarBot.png"></div>
+        SportForYou
     </div>
+
+    <div class="profile-section">
+        <img src="image/AvatarBot.png" class="avatar-profile" alt="Аватар">
+        <div class="info-profile">
+            <p><strong>Ім'я:</strong> <span id="display-name">Артем</span></p>
+            <p><strong>Вік:</strong> <span id="display-age">18</span></p>
+            <p><strong>Стать:</strong> <span id="display-gender">Чоловік</span></p>
+        </div>
+    </div>
+
+    <a href="calendar.html" style="text-decoration: none; color: inherit;">
+        <div class="date-box">
+            <span class="arrow">&lt;</span>
+            <span id="current-date">11 січня 2026 р.</span>
+            <span class="arrow">&gt;</span>
+        </div>
+    </a>
+
+    <div class="menu">
+        <a href="History_Training.html"><button class="menu-btn">Історія тренувань</button></a>
+        <div class="select-box">
+            <select><option disabled selected>Запросіть друзів</option></select>
+        </div>
+        <button class="menu-btn">Політика конфіденційності</button>
+        <button class="menu-btn">Умови використання</button>
+        <div class="select-box">
+            <select><option disabled selected>Мова</option></select>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+</div>
+
+<div class="footer">
+    <a href="Main.html"><button>Головна</button></a>
+    <a href="Create_training.html"><button>Тренування</button></a>
+    <a href="stats.html"><button>Статистика</button></a>
+    <a href="profile.html"><button class="active">Профіль</button></a>
+</div>
 
     <script src="script/register-profile.js"></script>
 </body>

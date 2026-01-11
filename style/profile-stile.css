@@ -9,7 +9,6 @@
     --radius: 12px;
 }
 
-/* ===== ОСНОВНИЙ BODY ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     background-color: var(--bg);
@@ -18,14 +17,14 @@ body {
     color: var(--text);
 }
 
-/* ===== ОСНОВНИЙ КОНТЕЙНЕР ===== */
+/* ===== КОНТЕЙНЕР ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 /* ===== HEADER ===== */
@@ -37,77 +36,54 @@ body {
     font-size: 20px;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.header-icon {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    border-radius: 50%;
+/* ===== PROFILE (ПОВЕРНУТО ЯК БУЛО) ===== */
+.profile-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.header-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* ===== INFO PROFILE ===== */
-.info-profile {
+    gap: 20px;
     background: var(--card);
     padding: 16px;
     border-radius: var(--radius);
     margin-bottom: 20px;
 }
 
+.avatar-profile {
+    width: 80px; /* Повертаємо фіксований розмір */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    flex-shrink: 0;
+}
+
 .info-profile p {
-    margin: 10px 0;
+    margin: 5px 0;
+    font-size: 15px;
 }
 
-.info-profile strong {
-    color: var(--accent);
-}
-
-.info-profile span {
-    color: var(--text);
-    font-weight: 500;
-    margin-left: 5px;
-}
+.info-profile strong { color: var(--accent); }
+.info-profile span { color: var(--text); font-weight: 500; }
 
 /* ===== DATE BOX ===== */
 .date-box {
     background-color: var(--card);
-    height: 40px;
+    height: 45px;
     border-radius: var(--radius);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 14px;
+    padding: 0 15px;
     margin-bottom: 20px;
-    font-size: 14px;
 }
 
-.arrow {
-    font-size: 20px;
-    color: var(--accent);
-    cursor: pointer;
-}
-
-/* ===== MENU & BUTTONS ===== */
+/* ===== MENU ===== */
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-}
-
-.menu a {
-    width: 100%;
-    text-decoration: none;
+    gap: 10px;
 }
 
 .menu-btn, .select-box select {
@@ -119,19 +95,8 @@ body {
     color: var(--text);
     font-size: 15px;
     cursor: pointer;
-    transition: 0.3s;
     text-align: center;
     box-sizing: border-box;
-}
-
-.menu-btn:hover, .select-box select:hover {
-    background: #262b3f;
-}
-
-/* ===== SELECT BOX ===== */
-.select-box {
-    width: 100%;
-    position: relative;
 }
 
 .select-box select {
@@ -141,13 +106,13 @@ body {
     background-position: right 15px center;
 }
 
-/* ===== ТОЙ САМИЙ ВІДСТУП ЗНИЗУ ===== */
+/* ===== ВІДСТУП ДЛЯ МЕНЮ ===== */
 .spacer {
-    height: 100px; /* Створює порожнє місце, щоб меню не закривало кнопки */
+    height: 100px;
     width: 100%;
 }
 
-/* ===== FOOTER (НИЖНЄ МЕНЮ) ===== */
+/* ===== FOOTER ===== */
 .footer {
     position: fixed;
     bottom: 0;
@@ -159,30 +124,21 @@ body {
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.footer a {
-    flex: 1;
-    max-width: 120px;
-    text-decoration: none;
-}
-
 .footer button {
-    width: 100%;
+    flex: 1;
     padding: 10px 0;
-    font-size: 13px;
-    font-weight: 500;
     background: var(--card);
     color: var(--text);
-    border-radius: 12px;
+    border-radius: 10px;
     border: none;
-    cursor: pointer;
-    transition: 0.2s ease;
+    font-size: 12px;
 }
 
-.footer button:hover {
+.footer button.active {
     background: var(--accent);
-    color: #ffffff;
+    color: white;
 }
