@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentGeneratedWorkout = null;
 
 async function generateWithAI() {
-
     const goal = document.getElementById('ai-goal').value;
     const level = document.getElementById('ai-level').value;
     const place = document.getElementById('ai-place').value;
@@ -28,32 +27,27 @@ async function generateWithAI() {
     const resultText = document.getElementById('result-text');
     const spinner = document.getElementById('loading-spinner');
 
-    // Очищення та підготовка
     btn.disabled = true;
     resultBox.style.display = "block";
     spinner.style.display = "block";
     resultText.innerText = "";
 
-    // Створюємо кнопку збереження динамічно, якщо її немає
     let saveBtn = document.getElementById('save-ai-btn');
     if (!saveBtn) {
         saveBtn = document.createElement('button');
         saveBtn.id = 'save-ai-btn';
         saveBtn.className = 'menu-btn';
-        saveBtn.style.background = '#28a745';
-        saveBtn.style.marginTop = '15px';
-        saveBtn.innerText = 'Додати до тренувань';
+        saveBtn.style.cssText = "background: #2ecc71; margin-top: 15px; display: none; width: 100%; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold;";
+        saveBtn.innerText = 'Додати до моїх тренувань';
         saveBtn.onclick = saveAiWorkoutToSystem;
-        saveBtn.style.display = 'none';
         resultBox.appendChild(saveBtn);
-    } else {
-        saveBtn.style.display = 'none';
     }
 
-    const prompt = `Склади тренування українською мовою. Ціль: ${goal}, складність: ${level}, місце: ${place}. Напиши список з 5-6 вправ (назва - підходи х повторення). Тільки текст вправ.`;
+    const prompt = `Склади тренування українською мовою. Ціль: ${goal}, складність: ${level}, місце: ${place}. Напиши список з 5-6 вправ (назва - підходи х повторення). Без вступу.`;
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        // ВИПРАВЛЕНО: посилання змінено з v1beta на v1
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -62,7 +56,7 @@ async function generateWithAI() {
         const data = await response.json();
 
         if (data.error) {
-            throw new Error(`Помилка API: ${data.error.message}`);
+            throw new Error(data.error.message);
         }
 
         const aiResponse = data.candidates[0].content.parts[0].text;
@@ -71,19 +65,17 @@ async function generateWithAI() {
         resultText.innerText = aiResponse;
         saveBtn.style.display = "block";
 
-        // Тимчасово зберігаємо дані в об'єкт
         currentGeneratedWorkout = {
             id: Date.now(),
             name: "AI: " + goal,
             exercises: aiResponse,
             difficulty: level,
-            date: new Date().toLocaleDateString('uk-UA')
+            isCompleted: false
         };
-
     } catch (error) {
         spinner.style.display = "none";
-        resultText.innerHTML = `<span style="color: red;">⚠️ Помилка: ${error.message}</span>`;
-        console.error("Деталі помилки:", error);
+        resultText.innerHTML = `<span style="color: #ff4d4d;">⚠️ Помилка: ${error.message}</span>`;
+        console.error("AI Error:", error);
     } finally {
         btn.disabled = false;
     }
