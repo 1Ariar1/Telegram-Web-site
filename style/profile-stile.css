@@ -19,13 +19,12 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== КОНТЕЙНЕР (ГОЛОВНИЙ ФІКС) ===== */
+/* ===== КОНТЕЙНЕР (АДАПТИВНИЙ ВІДСТУП) ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    /* Цей відступ автоматично створює місце під останньою кнопкою,
-       щоб вона не заходила під навігацію */
+    /* Цей відступ гарантує, що контент завжди буде вище меню */
     padding-bottom: 100px; 
     min-height: 100vh;
     display: flex;
@@ -45,21 +44,27 @@ body {
     margin-bottom: 25px;
 }
 
-/* ===== PROFILE SECTION ===== */
+/* ===== PROFILE (АДАПТИВНИЙ АВАТАР ЯК НА МЕЙНІ) ===== */
 .profile {
     display: flex;
     gap: 20px;
     align-items: center;
+    background: var(--card);
+    padding: 20px;
+    border-radius: var(--radius);
     margin-bottom: 20px;
-    padding: 10px;
 }
 
 .avatar-profile {
-    width: 80px;
-    height: 80px;
+    /* Робимо аватар адаптивним: він підлаштовується під розмір екрана */
+    width: 25%; 
+    min-width: 70px;
+    max-width: 110px;
+    aspect-ratio: 1 / 1; /* Завжди ідеальне коло */
     background: linear-gradient(145deg, var(--accent-dark), var(--accent));
     border-radius: 50%;
     flex-shrink: 0;
+    object-fit: cover;
 }
 
 .info-profile {
@@ -68,20 +73,10 @@ body {
     gap: 5px;
 }
 
-.info-profile div {
-    margin-bottom: 4px;
-}
+.info-profile strong { color: var(--accent); }
+.info-profile span { color: #fff; font-weight: 500; }
 
-.info-profile strong {
-    color: var(--accent);
-}
-
-.info-profile span {
-    color: #fff;
-    font-weight: 500;
-}
-
-/* ===== DATE SELECTOR ===== */
+/* ===== DATE BOX ===== */
 .date-box {
     background-color: var(--card);
     height: 45px;
@@ -90,44 +85,41 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(108, 99, 255, 0.2);
+    margin-bottom: 15px;
 }
 
-/* ===== MENU LIST (Кнопки як у Minecraft) ===== */
+/* ===== MENU LIST (КНОПКИ) ===== */
 .menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.menu a {
-    text-decoration: none;
-    width: 100%;
-}
+.menu a { text-decoration: none; width: 100%; }
 
 .menu-btn {
     width: 100%;
     background: var(--card);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 15px;
     color: var(--text);
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.2s ease;
     text-align: center;
     box-sizing: border-box;
     display: block;
 }
 
+/* Ефект натискання як у Minecraft */
 .menu-btn:active {
     background: var(--accent-dark);
-    transform: scale(0.98); /* Ефект натискання */
+    transform: scale(0.98);
 }
 
-/* ======= НИЖНЯ ПАНЕЛЬ (FOOTER) ======= */
+/* ======= НИЖНЄ МЕНЮ (FOOTER) ======= */
 .footer {
     position: fixed;
     bottom: 0;
@@ -136,21 +128,20 @@ body {
     z-index: 1000;
     background: #12142d;
     padding: 12px 16px;
-    /* Додаємо підтримку відступу для iPhone (Safe Area) */
     padding-bottom: max(12px, env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
-    gap: 10px;
-    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
+    gap: 8px;
+    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
 }
 
 .footer button {
     flex: 1;
-    max-width: 120px;
+    max-width: 110px;
     padding: 10px 0;
     background: #1c1f2e;
     color: #fff;
     border-radius: 10px;
     border: none;
-    font-size: 13px;
+    font-size: 12px;
 }
