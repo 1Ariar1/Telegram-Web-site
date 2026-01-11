@@ -9,7 +9,7 @@
     --radius: 12px;
 }
 
-/* ===== ОСНОВНИЙ BODY ===== */
+/* ===== ЗАГАЛЬНІ НАЛАШТУВАННЯ ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     background-color: var(--bg);
@@ -19,13 +19,12 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== КОНТЕЙНЕР (АДАПТИВНИЙ ВІДСТУП) ===== */
+/* ===== КОНТЕЙНЕР ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    /* Цей відступ гарантує, що контент завжди буде вище меню */
-    padding-bottom: 100px; 
+    /* Мінімальна висота, щоб фон не переривався */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -44,37 +43,44 @@ body {
     margin-bottom: 25px;
 }
 
-/* ===== PROFILE (АДАПТИВНИЙ АВАТАР ЯК НА МЕЙНІ) ===== */
-.profile {
+.header-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    border-radius: 50%;
     display: flex;
-    gap: 20px;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== ІНФОРМАЦІЯ ПРОФІЛЮ (АДАПТИВНА) ===== */
+.info-profile {
     background: var(--card);
-    padding: 20px;
+    padding: 15px;
     border-radius: var(--radius);
     margin-bottom: 20px;
 }
 
-.avatar-profile {
-    /* Робимо аватар адаптивним: він підлаштовується під розмір екрана */
-    width: 25%; 
-    min-width: 70px;
-    max-width: 110px;
-    aspect-ratio: 1 / 1; /* Завжди ідеальне коло */
-    background: linear-gradient(145deg, var(--accent-dark), var(--accent));
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
+.info-profile p {
+    margin: 8px 0;
+    font-size: 16px;
 }
 
-.info-profile {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.info-profile strong {
+    color: var(--accent);
 }
 
-.info-profile strong { color: var(--accent); }
-.info-profile span { color: #fff; font-weight: 500; }
+.info-profile span {
+    color: #fff;
+    font-weight: 500;
+}
 
 /* ===== DATE BOX ===== */
 .date-box {
@@ -85,19 +91,29 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
 }
 
-/* ===== MENU LIST (КНОПКИ) ===== */
+.arrow {
+    font-size: 20px;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+/* ===== СПИСОК МЕНЮ (КНОПКИ ТА СЕЛЕКТИ) ===== */
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-.menu a { text-decoration: none; width: 100%; }
+.menu a {
+    text-decoration: none;
+    width: 100%;
+}
 
-.menu-btn {
+.menu-btn, .select-box select {
     width: 100%;
     background: var(--card);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -113,10 +129,29 @@ body {
     display: block;
 }
 
-/* Ефект натискання як у Minecraft */
-.menu-btn:active {
+/* Ефект натискання (Minecraft Style) */
+.menu-btn:active, .select-box select:active {
     background: var(--accent-dark);
     transform: scale(0.98);
+}
+
+/* ===== СТИЛІЗАЦІЯ СЕЛЕКТІВ (МОВА ТА ДРУЗІ) ===== */
+.select-box {
+    width: 100%;
+}
+
+.select-box select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236c63ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+}
+
+/* ===== РОЗПІРНИЙ БЛОК (ЩОБ НЕ ПЕРЕКРИВАЛО) ===== */
+.spacer {
+    height: 100px; /* Висота цього блоку відштовхує кнопки від меню */
+    width: 100%;
+    flex-shrink: 0;
 }
 
 /* ======= НИЖНЄ МЕНЮ (FOOTER) ======= */
@@ -128,6 +163,7 @@ body {
     z-index: 1000;
     background: #12142d;
     padding: 12px 16px;
+    /* Враховуємо Safe Area для iPhone */
     padding-bottom: max(12px, env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
@@ -135,13 +171,25 @@ body {
     box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
 }
 
-.footer button {
+.footer a {
     flex: 1;
     max-width: 110px;
+    text-decoration: none;
+}
+
+.footer button {
+    width: 100%;
     padding: 10px 0;
-    background: #1c1f2e;
+    background: var(--card);
     color: #fff;
     border-radius: 10px;
     border: none;
     font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.footer button:hover {
+    background: var(--accent);
 }
