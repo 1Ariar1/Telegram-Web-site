@@ -9,26 +9,23 @@
     --radius: 12px;
 }
 
-/* ===== ЗАГАЛЬНІ НАЛАШТУВАННЯ ===== */
+/* ===== ОСНОВНИЙ BODY ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     background-color: var(--bg);
     margin: 0;
     padding: 0;
     color: var(--text);
-    overflow-x: hidden;
 }
 
-/* ===== КОНТЕЙНЕР ===== */
+/* ===== ОСНОВНИЙ КОНТЕЙНЕР ===== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    /* Мінімальна висота, щоб фон не переривався */
-    min-height: 100vh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
 }
 
 /* ===== HEADER ===== */
@@ -40,7 +37,7 @@ body {
     font-size: 20px;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .header-icon {
@@ -60,17 +57,16 @@ body {
     object-fit: cover;
 }
 
-/* ===== ІНФОРМАЦІЯ ПРОФІЛЮ (АДАПТИВНА) ===== */
+/* ===== INFO PROFILE ===== */
 .info-profile {
     background: var(--card);
-    padding: 15px;
+    padding: 16px;
     border-radius: var(--radius);
     margin-bottom: 20px;
 }
 
 .info-profile p {
-    margin: 8px 0;
-    font-size: 16px;
+    margin: 10px 0;
 }
 
 .info-profile strong {
@@ -78,21 +74,22 @@ body {
 }
 
 .info-profile span {
-    color: #fff;
+    color: var(--text);
     font-weight: 500;
+    margin-left: 5px;
 }
 
 /* ===== DATE BOX ===== */
 .date-box {
     background-color: var(--card);
-    height: 45px;
+    height: 40px;
     border-radius: var(--radius);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 14px;
     margin-bottom: 20px;
-    border: 1px solid rgba(108, 99, 255, 0.2);
+    font-size: 14px;
 }
 
 .arrow {
@@ -101,7 +98,7 @@ body {
     cursor: pointer;
 }
 
-/* ===== СПИСОК МЕНЮ (КНОПКИ ТА СЕЛЕКТИ) ===== */
+/* ===== MENU & BUTTONS ===== */
 .menu {
     display: flex;
     flex-direction: column;
@@ -109,35 +106,32 @@ body {
 }
 
 .menu a {
-    text-decoration: none;
     width: 100%;
+    text-decoration: none;
 }
 
 .menu-btn, .select-box select {
     width: 100%;
     background: var(--card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: none;
     border-radius: var(--radius);
-    padding: 15px;
+    padding: 14px;
     color: var(--text);
     font-size: 15px;
-    font-weight: 500;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: 0.3s;
     text-align: center;
     box-sizing: border-box;
-    display: block;
 }
 
-/* Ефект натискання (Minecraft Style) */
-.menu-btn:active, .select-box select:active {
-    background: var(--accent-dark);
-    transform: scale(0.98);
+.menu-btn:hover, .select-box select:hover {
+    background: #262b3f;
 }
 
-/* ===== СТИЛІЗАЦІЯ СЕЛЕКТІВ (МОВА ТА ДРУЗІ) ===== */
+/* ===== SELECT BOX ===== */
 .select-box {
     width: 100%;
+    position: relative;
 }
 
 .select-box select {
@@ -147,14 +141,13 @@ body {
     background-position: right 15px center;
 }
 
-/* ===== РОЗПІРНИЙ БЛОК (ЩОБ НЕ ПЕРЕКРИВАЛО) ===== */
+/* ===== ТОЙ САМИЙ ВІДСТУП ЗНИЗУ ===== */
 .spacer {
-    height: 100px; /* Висота цього блоку відштовхує кнопки від меню */
+    height: 100px; /* Створює порожнє місце, щоб меню не закривало кнопки */
     width: 100%;
-    flex-shrink: 0;
 }
 
-/* ======= НИЖНЄ МЕНЮ (FOOTER) ======= */
+/* ===== FOOTER (НИЖНЄ МЕНЮ) ===== */
 .footer {
     position: fixed;
     bottom: 0;
@@ -163,33 +156,33 @@ body {
     z-index: 1000;
     background: #12142d;
     padding: 12px 16px;
-    /* Враховуємо Safe Area для iPhone */
-    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
-    gap: 8px;
-    box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
+    gap: 10px;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .footer a {
     flex: 1;
-    max-width: 110px;
+    max-width: 120px;
     text-decoration: none;
 }
 
 .footer button {
     width: 100%;
     padding: 10px 0;
+    font-size: 13px;
+    font-weight: 500;
     background: var(--card);
-    color: #fff;
-    border-radius: 10px;
+    color: var(--text);
+    border-radius: 12px;
     border: none;
-    font-size: 12px;
-    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .footer button:hover {
     background: var(--accent);
+    color: #ffffff;
 }

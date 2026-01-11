@@ -10,6 +10,7 @@
 
 <body>
     <div class="container">
+
         <div class="header">
             <div class="header-icon">
                 <img src="image/AvatarBot.png" alt="Logo">
@@ -34,7 +35,9 @@
         </a>
 
         <div class="menu">
-            <a href="History_Training.html"><button class="menu-btn">Історія тренувань</button></a>
+            <a href="History_Training.html">
+                <button class="menu-btn">Історія тренувань</button>
+            </a>
 
             <div class="select-box">
                 <select id="invite-select" onchange="handleInvite(this)">
@@ -54,13 +57,14 @@
                 </select>
             </div>
         </div>
-        
-        <div class="spacer" style="height: 100px;"></div>
+
+        <div class="spacer"></div>
+
     </div> <div class="footer">
         <a href="Main.html"><button>Головна</button></a>
         <a href="Create_training.html"><button>Тренування</button></a>
         <a href="stats.html"><button>Статистика</button></a>
-        <a href="profile.html"><button style="background: var(--accent);">Профіль</button></a>
+        <a href="profile.html"><button style="background: var(--accent); color: white;">Профіль</button></a>
     </div>
 
     <script src="script/register-profile.js"></script>
