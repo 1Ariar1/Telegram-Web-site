@@ -61,6 +61,13 @@ body {
     background-color: var(--accent-soft);
     border-radius: 50%;
 }
+.bot-logo {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--accent); /* Опціонально: додає тонку рамку навколо аватара */
+}
 
 .info .name {
     font-weight: bold;

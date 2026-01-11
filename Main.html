@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img class="header-icon" src="image/AvatarBot.png" alt="Logo">
+            <img src="image/AvatarBot.png" class="bot-logo" id="main-avatar" alt="Logo">
             <span>SportForYou</span>
         </div>
 
@@ -42,7 +42,30 @@
             <a href="profile.html"><button>Профіль</button></a>
         </div>
     </div>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+    // Ініціалізація Telegram
+    const tg = window.Telegram.WebApp;
+    const user = tg.initDataUnsafe?.user;
+    
+    // Знаходимо елемент аватара в шапці
+    const mainAvatar = document.getElementById('main-avatar');
 
+    if (mainAvatar) {
+        // 1. Перевіряємо, чи є ручне фото в localStorage
+        const savedPhoto = localStorage.getItem('userCustomPhoto');
+        
+        if (savedPhoto) {
+            mainAvatar.src = savedPhoto;
+        } 
+        // 2. Якщо немає ручного, перевіряємо фото з Telegram
+        else if (user && user.photo_url) {
+            mainAvatar.src = user.photo_url;
+        }
+        // 3. Якщо нічого немає, залишається стандартний AvatarBot.png (вже вказаний в HTML)
+    }
+});
+</script>
     <script src="script/Quotes-ai.js"></script>
      <script src="script/sport-exercises-main.js"></script>
      <script src="script/register-main.js"></script>
