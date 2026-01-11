@@ -60,11 +60,11 @@ body {
 }
 
 .avatar-profile {
-    width: 60px !important; /* Фіксований невеликий розмір аватара */
+    width: 60px !important;
     height: 60px !important;
     border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0; /* Щоб не стискався */
+    object-fit: cover; /* Это важно для корректного отображения фото из ТГ */
+    flex-shrink: 0;
     border: 2px solid var(--accent);
 }
 

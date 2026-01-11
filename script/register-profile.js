@@ -38,3 +38,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (val) document.getElementById(id).textContent = val;
     }
 });
+// Инициализация Telegram WebApp
+const tg = window.Telegram.WebApp;
+tg.expand(); // Разворачивает приложение на всю высоту
+
+// Получаем данные пользователя
+const user = tg.initDataUnsafe?.user;
+
+if (user) {
+    // Устанавливаем имя пользователя из ТГ
+    if (document.getElementById('display-name')) {
+        document.getElementById('display-name').innerText = user.first_name || "Пользователь";
+    }
+
+    // Проверяем наличие фото в профиле ТГ
+    const avatarImg = document.getElementById('user-avatar');
+    if (user.photo_url && avatarImg) {
+        avatarImg.src = user.photo_url;
+    } else {
+        // Если фото в ТГ нет, оставляем твою стандартную картинку
+        console.log("Фото пользователя не найдено в профиле Telegram");
+    }
+}
