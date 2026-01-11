@@ -10,7 +10,6 @@ function handleInvite(selectElement) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Ініціалізація Telegram
     const tg = window.Telegram.WebApp;
     tg.ready();
     tg.expand();
@@ -23,22 +22,28 @@ document.addEventListener('DOMContentLoaded', function() {
         dateElement.textContent = now.toLocaleDateString('uk-UA', options);
     }
 
-    // 2. Отримання даних з ТГ
+    // 2. Дані Telegram
     const user = tg.initDataUnsafe?.user;
     const avatarImg = document.getElementById('user-avatar');
     const nameElement = document.getElementById('display-name');
+    const avatarContainer = document.getElementById('avatar-container');
 
     if (user) {
-        // Ім'я
-        if (nameElement) nameElement.innerText = user.first_name || "Користувач";
+        // Встановлюємо ім'я
+        const firstName = user.first_name || "Користувач";
+        if (nameElement) nameElement.innerText = firstName;
         
-        // Аватар (заміна картинки)
-        if (avatarImg && user.photo_url) {
+        // Перевірка аватара
+        if (user.photo_url) {
             avatarImg.src = user.photo_url;
+        } else {
+            // ЯКЩО ФОТО НЕМАЄ: створюємо іконку з літерою
+            const firstLetter = firstName.charAt(0).toUpperCase();
+            avatarContainer.innerHTML = `<div class="avatar-placeholder">${firstLetter}</div>`;
         }
     }
 
-    // 3. Дані з анкети (localStorage)
+    // 3. Дані з localStorage
     const dataMap = {
         'userName': 'display-name',
         'userAge': 'display-age',
