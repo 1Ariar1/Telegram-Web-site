@@ -7,6 +7,19 @@
     <link rel="icon" type="image/png" href="image/AvatarBot.png">
     <link rel="stylesheet" href="style/profile-stile.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Стиль для кнопки скидання */
+        .reset-btn {
+            background: #ff4d4d !important;
+            color: white !important;
+            margin-top: 10px;
+            border: none;
+            font-weight: bold;
+        }
+        .reset-btn:active {
+            background: #cc0000 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,6 +67,8 @@
                     <option value="en">English</option>
                 </select>
             </div>
+            
+            <button class="menu-btn reset-btn" onclick="resetAllData()">Вийти з акаунту (Скинути дані)</button>
         </div>
         <div class="spacer"></div>
     </div>
@@ -66,5 +81,16 @@
     </div>
 
     <script src="script/register-profile.js"></script>
+    <script>
+        // Функція для повного очищення даних
+        function resetAllData() {
+            if (confirm("Ви впевнені? Це видалить ваш профіль, всі тренування та історію!")) {
+                localStorage.clear(); // Видаляє абсолютно все з пам'яті браузера
+                
+                // Якщо у тебе сторінка реєстрації називається index.html або register.html
+                window.location.href = 'index.html'; 
+            }
+        }
+    </script>
 </body>
 </html>
