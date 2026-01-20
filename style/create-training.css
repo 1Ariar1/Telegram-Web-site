@@ -10,7 +10,7 @@
     background: rgba(28, 31, 46, 0.5);
     border-radius: var(--radius);
     padding: 15px;
-    margin-bottom: 100px; /* Більший відступ для футера */
+    margin-bottom: 100px; 
 }
 
 /* ======= СТИЛІ ПОЛІВ ВВОДУ (ОНОВЛЕНО) ======= */
@@ -18,7 +18,7 @@
 .input-main, .input-small, select.input-main {
     width: 100%;
     padding: 10px 12px; 
-    background: #0d0f1a; /* Темніший фон для контрасту */
+    background: #0d0f1a; 
     border: 1px solid rgba(108, 99, 255, 0.3);
     border-radius: 8px;
     color: white;
