@@ -3,374 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Політика конфіденційності</title>
-    <link href="style.css" rel="stylesheet">
+    <title>Політика конфіденційності — SportForYou</title>
+    <link rel="icon" type="image/png" href="image/AvatarBot.png">
+    <link rel="stylesheet" href="style/style.css">
     <style>
-        :root {
-            --bg: #0D0F26;
-            --card: #1A1D3A;
-            --accent: #6A4CFF;
-            --accent2: #8A6CFF;
-            --text: #E4E7FF;
-            --text-secondary: #9CA3C7;
-            --radius: 14px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: var(--bg);
-            font-family: "Inter", sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 24px 16px 100px;
-        }
-
-        /* HEADER */
-        .page-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
         .back-btn {
-            width: 36px;
-            height: 36px;
-            background: var(--card);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text);
-            font-size: 18px;
-            flex-shrink: 0;
-            transition: background 0.2s;
+            width: 36px; height: 36px;
+            background: var(--card); border: none; border-radius: 50%;
+            cursor: pointer; color: var(--text); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: background 0.2s;
         }
+        .back-btn:hover { background: var(--accent); }
 
-        .back-btn:hover {
-            background: var(--accent);
-        }
-
-        .page-title-block h1 {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.2;
-        }
-
-        .page-title-block p {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        /* SHIELD ICON BANNER */
         .banner {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 14px;
             border-left: 3px solid var(--accent);
             box-shadow: 0 6px 16px rgba(0,0,0,0.35);
         }
+        .banner-icon { font-size: 32px; flex-shrink: 0; }
+        .banner-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .banner-text strong { color: var(--text); display: block; font-size: 14px; margin-bottom: 2px; }
 
-        .banner-icon {
-            font-size: 36px;
-            flex-shrink: 0;
-        }
-
-        .banner-text {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .banner-text strong {
-            color: var(--text);
-            display: block;
-            font-size: 14px;
-            margin-bottom: 2px;
-        }
-
-        /* SECTIONS */
         .section-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 12px;
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; margin-bottom: 12px;
             box-shadow: 0 6px 16px rgba(0,0,0,0.35);
             cursor: pointer;
-            transition: box-shadow 0.2s;
         }
-
-        .section-card:hover {
-            box-shadow: 0 8px 20px rgba(106,76,255,0.15);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .section-header { display: flex; align-items: center; gap: 12px; }
         .section-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(106, 76, 255, 0.15);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
+            width: 36px; height: 36px;
+            background: rgba(106, 76, 255, 0.15); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
         }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text);
-            flex: 1;
-        }
-
-        .chevron {
-            font-size: 16px;
-            color: var(--text-secondary);
-            transition: transform 0.3s;
-        }
-
-        .section-card.open .chevron {
-            transform: rotate(90deg);
-        }
+        .section-title { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
+        .chevron { font-size: 16px; color: var(--text-secondary); transition: transform 0.3s; }
+        .section-card.open .chevron { transform: rotate(90deg); }
 
         .section-body {
-            display: none;
-            margin-top: 12px;
-            padding-top: 12px;
+            display: none; margin-top: 12px; padding-top: 12px;
             border-top: 1px solid rgba(255,255,255,0.06);
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            font-size: 13px; color: var(--text-secondary); line-height: 1.7;
         }
+        .section-card.open .section-body { display: block; }
+        .section-body p { margin-bottom: 8px; }
+        .section-body p:last-child { margin-bottom: 0; }
+        .section-body ul { padding-left: 18px; margin-top: 4px; }
+        .section-body ul li { margin-bottom: 4px; }
 
-        .section-card.open .section-body {
-            display: block;
-        }
-
-        .section-body p {
-            margin-bottom: 8px;
-        }
-
-        .section-body p:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-body ul {
-            padding-left: 18px;
-            margin-top: 4px;
-        }
-
-        .section-body ul li {
-            margin-bottom: 4px;
-        }
-
-        /* CONTACT CARD */
         .contact-card {
-            background: linear-gradient(135deg, var(--accent) 0%, #8A6CFF 100%);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            border-radius: var(--radius); padding: 16px; margin-top: 8px;
+            display: flex; align-items: center; gap: 14px;
             box-shadow: 0 6px 20px rgba(106,76,255,0.4);
         }
-
-        .contact-icon {
-            font-size: 28px;
-        }
-
-        .contact-text strong {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .contact-text span {
-            font-size: 12px;
-            color: rgba(255,255,255,0.75);
-        }
-
-        /* FOOTER NOTE */
-        .footer-note {
-            text-align: center;
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 20px;
-            opacity: 0.6;
-        }
-
-        /* BOTTOM NAV */
-        .menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: #12142d;
-            padding: 10px 16px;
-            padding-bottom: calc(10px + env(safe-area-inset-bottom));
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .menu a {
-            flex: 1;
-            max-width: 120px;
-            text-decoration: none;
-        }
-
-        .menu button {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 13px;
-            background: var(--card);
-            color: var(--text);
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .menu button:hover, .menu button.active {
-            background: var(--accent);
-            color: #ffffff;
-        }
+        .contact-icon { font-size: 28px; }
+        .contact-text strong { display: block; font-size: 14px; font-weight: 600; color: #fff; }
+        .contact-text span  { font-size: 12px; color: rgba(255,255,255,0.75); }
     </style>
 </head>
 <body>
-
-<div class="container">
-
-    <div class="page-header">
-        <button class="back-btn" onclick="history.back()">←</button>
-        <div class="page-title-block">
-            <h1>Політика конфіденційності</h1>
-            <p>Останнє оновлення: 2026</p>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <span>Політика конфіденційності</span>
         </div>
+
+        <div class="banner">
+            <div class="banner-icon">🛡️</div>
+            <div class="banner-text">
+                <strong>Ваші дані під захистом</strong>
+                Ця сторінка описує, як ми збираємо, використовуємо та захищаємо вашу інформацію.
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <span class="section-title">Збір інформації</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Ми можемо збирати особисті дані, які ви надаєте безпосередньо: ім'я, електронну пошту або повідомлення, що надсилаються через бота.</p>
+                <p>Також може збиратися технічна інформація про використання сайту або бота для покращення сервісу.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">⚙️</div>
+                <span class="section-title">Використання інформації</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Інформація використовується для:</p>
+                <ul>
+                    <li>підтримки та обробки запитів;</li>
+                    <li>покращення роботи бота;</li>
+                    <li>інформування вас про оновлення та зміни.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🍪</div>
+                <span class="section-title">Файли cookie та подібні технології</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Ми можемо використовувати файли cookie та інші технології для збору даних про взаємодію з сайтом.</p>
+                <p>Ці дані допомагають покращити швидкість і зручність користування.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🔒</div>
+                <span class="section-title">Безпека</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Ми приймаємо розумні заходи для захисту вашої інформації від несанкціонованого доступу та втрати.</p>
+                <p>Однак жодна система не може бути абсолютно безпечною, тому дотримання безпекових заходів є спільною відповідальністю.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <span class="section-title">Передача третім сторонам</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Ми не продаємо вашу особисту інформацію третім особам. Інформація може передаватися лише у випадках, передбачених законодавством або для забезпечення роботи сервісу.</p>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-text">
+                <strong>Є питання?</strong>
+                <span>Звертайтесь до адміністратора бота</span>
+            </div>
+        </div>
+
+        <p style="text-align:center; font-size:11px; color:var(--text-secondary); margin-top:20px; opacity:0.6;">
+            SportForYou · @YourSportsTraining_bot
+        </p>
+
+        <div class="spacer"></div>
     </div>
 
-    <div class="banner">
-        <div class="banner-icon">🛡️</div>
-        <div class="banner-text">
-            <strong>Ваші дані під захистом</strong>
-            Ця сторінка описує, як ми збираємо, використовуємо та захищаємо вашу інформацію.
-        </div>
+    <div class="menu">
+        <a href="Main.html"><button>Головна</button></a>
+        <a href="Create_training.html"><button>Тренування</button></a>
+        <a href="stats.html"><button>Статистика</button></a>
+        <a href="profile.html"><button class="active">Профіль</button></a>
     </div>
-
-    <div class="section-card" onclick="toggle(this)">
-        <div class="section-header">
-            <div class="section-icon">📋</div>
-            <span class="section-title">Збір інформації</span>
-            <span class="chevron">›</span>
-        </div>
-        <div class="section-body">
-            <p>Ми можемо збирати особисті дані, які ви надаєте безпосередньо: ім'я, електронну пошту або повідомлення, що надсилаються через бота.</p>
-            <p>Також може збиратися технічна інформація про використання сайту або бота для покращення сервісу.</p>
-        </div>
-    </div>
-
-    <div class="section-card" onclick="toggle(this)">
-        <div class="section-header">
-            <div class="section-icon">⚙️</div>
-            <span class="section-title">Використання інформації</span>
-            <span class="chevron">›</span>
-        </div>
-        <div class="section-body">
-            <p>Інформація використовується для:</p>
-            <ul>
-                <li>підтримки та обробки запитів;</li>
-                <li>покращення роботи бота;</li>
-                <li>інформування вас про оновлення та зміни.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section-card" onclick="toggle(this)">
-        <div class="section-header">
-            <div class="section-icon">🍪</div>
-            <span class="section-title">Файли cookie та подібні технології</span>
-            <span class="chevron">›</span>
-        </div>
-        <div class="section-body">
-            <p>Ми можемо використовувати файли cookie та інші технології для збору даних про взаємодію з сайтом.</p>
-            <p>Ці дані допомагають покращити швидкість і зручність користування.</p>
-        </div>
-    </div>
-
-    <div class="section-card" onclick="toggle(this)">
-        <div class="section-header">
-            <div class="section-icon">🔒</div>
-            <span class="section-title">Безпека</span>
-            <span class="chevron">›</span>
-        </div>
-        <div class="section-body">
-            <p>Ми приймаємо розумні заходи для захисту вашої інформації від несанкціонованого доступу та втрати.</p>
-            <p>Однак жодна система не може бути абсолютно безпечною, тому дотримання безпекових заходів є спільною відповідальністю.</p>
-        </div>
-    </div>
-
-    <div class="section-card" onclick="toggle(this)">
-        <div class="section-header">
-            <div class="section-icon">🤝</div>
-            <span class="section-title">Передача третім сторонам</span>
-            <span class="chevron">›</span>
-        </div>
-        <div class="section-body">
-            <p>Ми не продаємо вашу особисту інформацію третім особам. Інформація може передаватися лише у випадках, передбачених законодавством або для забезпечення роботи сервісу.</p>
-        </div>
-    </div>
-
-    <div class="contact-card">
-        <div class="contact-icon">✉️</div>
-        <div class="contact-text">
-            <strong>Є питання?</strong>
-            <span>Звертайтесь до адміністратора бота</span>
-        </div>
-    </div>
-
-    <p class="footer-note">SportForYou · @YourSportsTraining_bot</p>
-
-</div>
-
-<div class="menu">
-    <a href="Main.html"><button>🏠 Головна</button></a>
-    <a href="Create_training.html"><button>💪 Тренування</button></a>
-    <a href="stats.html"><button>📊 Статистика</button></a>
-    <a href="profile.html"><button class="active">👤 Профіль</button></a>
-</div>
-
-<script>
-    function toggle(card) {
-        card.classList.toggle('open');
-    }
-</script>
-
 </body>
 </html>

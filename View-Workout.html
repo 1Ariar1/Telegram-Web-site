@@ -6,37 +6,56 @@
     <title>Тренування — SportForYou</title>
     <link rel="icon" type="image/png" href="image/AvatarBot.png">
     <link rel="stylesheet" href="style/style.css">
-    
     <style>
-        .workout-content { margin-bottom: 120px; }
         .workout-header-info {
-            text-align: center; margin-bottom: 25px; padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
             background: linear-gradient(135deg, var(--card), #252a41);
             border-radius: var(--radius);
         }
         .workout-header-info h2 { color: var(--accent); margin: 0; }
+
         .exercise-card {
-            background: var(--card); border-radius: var(--radius);
-            padding: 16px 20px; margin-bottom: 15px;
-            display: flex; justify-content: space-between; align-items: center;
-            border-left: 5px solid var(--accent); transition: 0.2s;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--accent);
+            transition: 0.2s;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-        /* Стиль для виконаної вправи */
-        .exercise-card.done { 
-            opacity: 0.5; 
-            border-left-color: #2ecc71; 
-            transform: scale(0.98); 
+        .exercise-card.done {
+            opacity: 0.5;
+            border-left-color: #2ecc71;
+            transform: scale(0.98);
         }
         .ex-main-info h3 { margin: 0; font-size: 18px; color: var(--text); }
         .stat-badge {
-            display: inline-block; margin-top: 5px; background: rgba(108, 99, 255, 0.1);
-            color: var(--accent); padding: 2px 8px; border-radius: 6px; font-weight: 600; font-size: 13px;
+            display: inline-block;
+            margin-top: 5px;
+            background: rgba(106, 76, 255, 0.1);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
         }
         .complete-workout-btn {
-            width: 100%; padding: 16px; background: #2ecc71; color: white;
-            border: none; border-radius: var(--radius); font-size: 16px;
-            font-weight: bold; cursor: pointer; margin-top: 20px;
+            width: 100%;
+            padding: 16px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
             box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
         }
     </style>
@@ -44,46 +63,41 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-icon"><img src="image/AvatarBot.png" alt="Logo"></div>
-            <span class="logo">SportForYou</span>
-        </div>
-
-        <div class="workout-content">
-            <div class="workout-header-info">
-                <h2 id="view-workout-name">Завантаження...</h2>
-                <p id="workout-status" style="font-size: 13px; color: var(--text-dim); margin-top: 8px;"></p>
+            <div class="header-icon">
+                <img src="image/AvatarBot.png" alt="Logo">
             </div>
-
-            <div id="exercises-display"></div>
-
-            <button id="finish-btn" class="complete-workout-btn" onclick="finishSession()">Завершити тренування</button>
+            <span>SportForYou</span>
         </div>
 
-        <div class="menu">
-            <a href="Main.html"><button>Головна</button></a>
-            <a href="Create_training.html"><button class="active">Тренування</button></a>
-            <a href="stats.html"><button>Статистика</button></a>
-            <a href="profile.html"><button>Профіль</button></a>
+        <div class="workout-header-info">
+            <h2 id="view-workout-name">Завантаження...</h2>
+            <p id="workout-status" style="font-size:13px; color:var(--text-secondary); margin-top:8px;"></p>
         </div>
+
+        <div id="exercises-display"></div>
+
+        <button id="finish-btn" class="complete-workout-btn" onclick="finishSession()">Завершити тренування</button>
+    </div>
+
+    <div class="menu">
+        <a href="Main.html"><button>Головна</button></a>
+        <a href="Create_training.html"><button class="active">Тренування</button></a>
+        <a href="stats.html"><button>Статистика</button></a>
+        <a href="profile.html"><button>Профіль</button></a>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const historyIndex = urlParams.get('historyIndex');
             let workout;
 
-            // 1. ЛОГІКА ЗАВАНТАЖЕННЯ ДАНИХ
             if (historyIndex !== null) {
-                // Перегляд завершеного тренування з історії
                 const history = JSON.parse(localStorage.getItem('workoutHistory')) || [];
                 workout = history[historyIndex];
-                if (document.getElementById('finish-btn')) {
-                    document.getElementById('finish-btn').style.display = 'none';
-                }
+                document.getElementById('finish-btn').style.display = 'none';
                 document.getElementById('workout-status').textContent = "Перегляд історії: " + (workout.date || "");
             } else {
-                // Запуск активного тренування (згенерованого AI або створеного вручну)
                 workout = JSON.parse(localStorage.getItem('current_active_workout'));
                 document.getElementById('workout-status').textContent = "Активне тренування";
             }
@@ -94,70 +108,46 @@
                 return;
             }
 
-            // 2. ВІДОБРАЖЕННЯ НАЗВИ ТА ВПРАВ
             document.getElementById('view-workout-name').textContent = workout.name;
             const display = document.getElementById('exercises-display');
-            display.innerHTML = ''; // Очищуємо контейнер
+            display.innerHTML = '';
 
-            // 3. УНІВЕРСАЛЬНА ЛОГІКА ВІДОБРАЖЕННЯ (Текст від AI або Масив від юзера)
             if (typeof workout.exercises === 'string') {
-                // Розбиваємо текст AI на рядки та створюємо картки
-                const lines = workout.exercises.split('\n').filter(line => line.trim() !== '');
-                lines.forEach((line, index) => {
-                    createExerciseCard(display, index, line, "");
-                });
+                const lines = workout.exercises.split('\n').filter(l => l.trim() !== '');
+                lines.forEach((line, i) => createExerciseCard(display, i, line, ""));
             } else if (Array.isArray(workout.exercises)) {
-                // Виводимо вправи, створені через конструктор вручну
-                workout.exercises.forEach((ex, index) => {
-                    createExerciseCard(display, index, ex.name, ex.details);
-                });
+                workout.exercises.forEach((ex, i) => createExerciseCard(display, i, ex.name, ex.details));
             }
         });
 
-        // Функція створення HTML-картки вправи
         function createExerciseCard(container, index, name, details) {
             const card = document.createElement('div');
             card.className = 'exercise-card';
-            
-            // Клік по картці позначає її як виконану (візуально)
-            card.onclick = function() { this.classList.toggle('done'); };
-            
+            card.onclick = function () { this.classList.toggle('done'); };
             const cleanDetails = details ? details.replace('підходи', 'п.').replace('разів', 'повт.') : "";
-
             card.innerHTML = `
                 <div class="ex-main-info">
                     <h3>${index + 1}. ${name}</h3>
                     ${cleanDetails ? `<div class="stat-badge">${cleanDetails}</div>` : ''}
                 </div>
-                <div style="color: #2ecc71; font-weight: bold;">✓</div>
+                <div style="color:#2ecc71; font-weight:bold;">✓</div>
             `;
             container.appendChild(card);
         }
 
-        // Логіка збереження в історію та перенаправлення
         function finishSession() {
             const workout = JSON.parse(localStorage.getItem('current_active_workout'));
-            
             if (workout) {
                 let history = JSON.parse(localStorage.getItem('workoutHistory')) || [];
-                
-                // Додаємо дату та міняємо статус
                 workout.date = new Date().toLocaleDateString('uk-UA');
                 workout.isCompleted = true;
-                
-                // Додаємо в початок масиву історії
                 history.unshift(workout);
                 localStorage.setItem('workoutHistory', JSON.stringify(history));
-
-                // Видаляємо це тренування зі списку активних
                 let allWorkouts = JSON.parse(localStorage.getItem('userWorkouts') || '[]');
                 allWorkouts = allWorkouts.filter(w => w.id !== workout.id);
                 localStorage.setItem('userWorkouts', JSON.stringify(allWorkouts));
-                
-                // Очищуємо слот поточного тренування
                 localStorage.removeItem('current_active_workout');
             }
-            
             alert("Вітаємо! Тренування завершено та збережено в історію.");
             window.location.href = 'Create_training.html';
         }

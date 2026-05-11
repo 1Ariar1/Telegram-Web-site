@@ -5,28 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportForYou — Профіль</title>
     <link rel="icon" type="image/png" href="image/AvatarBot.png">
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/profile-stile.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style/style.css">
-    <style>
-        /* Стиль для кнопки скидання */
-        .reset-btn {
-            background: #ff4d4d !important;
-            color: white !important;
-            margin-top: 10px;
-            border: none;
-            font-weight: bold;
-        }
-        .reset-btn:active {
-            background: #cc0000 !important;
-        }
-    </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
-            <div class="header-icon"><img src="image/AvatarBot.png" class="bot-logo"></div>
+            <div class="header-icon">
+                <img src="image/AvatarBot.png" class="bot-logo" alt="Logo">
+            </div>
             <span>SportForYou</span>
         </div>
 
@@ -35,7 +23,6 @@
                 <img src="image/AvatarBot.png" class="avatar-profile" id="user-avatar" alt="User Avatar">
             </div>
             <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="uploadPhoto(this)">
-            
             <div class="info-profile">
                 <p><strong>Ім'я:</strong> <span id="display-name">...</span></p>
                 <p><strong>Вік:</strong> <span id="display-age">--</span></p>
@@ -51,7 +38,7 @@
             </div>
         </a>
 
-        <div class="menu">
+        <div class="profile-menu">
             <a href="History_Training.html"><button class="menu-btn">Історія тренувань</button></a>
             <div class="select-box">
                 <select id="invite-select" onchange="handleInvite(this)">
@@ -68,9 +55,9 @@
                     <option value="en">English</option>
                 </select>
             </div>
-            
             <button class="menu-btn reset-btn" onclick="resetAllData()">Вийти з акаунту (Скинути дані)</button>
         </div>
+
         <div class="spacer"></div>
     </div>
 
@@ -83,13 +70,10 @@
 
     <script src="script/register-profile.js"></script>
     <script>
-        // Функція для повного очищення даних
         function resetAllData() {
             if (confirm("Ви впевнені? Це видалить ваш профіль, всі тренування та історію!")) {
-                localStorage.clear(); // Видаляє абсолютно все з пам'яті браузера
-                
-                // Якщо у тебе сторінка реєстрації називається index.html або register.html
-                window.location.href = 'index.html'; 
+                localStorage.clear();
+                window.location.href = 'index.html';
             }
         }
     </script>

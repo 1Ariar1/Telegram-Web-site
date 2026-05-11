@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умови використання — SportForYou</title>
+    <link rel="icon" type="image/png" href="image/AvatarBot.png">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        .back-btn {
+            width: 36px; height: 36px;
+            background: var(--card); border: none; border-radius: 50%;
+            cursor: pointer; color: var(--text); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: background 0.2s;
+        }
+        .back-btn:hover { background: var(--accent); }
+
+        .section-card {
+            background: var(--card); border-radius: var(--radius);
+            padding: 16px; margin-bottom: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35); cursor: pointer;
+        }
+        .section-header { display: flex; align-items: center; gap: 12px; }
+        .section-icon {
+            width: 36px; height: 36px;
+            background: rgba(106, 76, 255, 0.15); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; flex-shrink: 0;
+        }
+        .section-title { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
+        .chevron { font-size: 16px; color: var(--text-secondary); transition: transform 0.3s; }
+        .section-card.open .chevron { transform: rotate(90deg); }
+        .section-body {
+            display: none; margin-top: 12px; padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 13px; color: var(--text-secondary); line-height: 1.7;
+        }
+        .section-card.open .section-body { display: block; }
+        .section-body p { margin-bottom: 8px; }
+        .section-body p:last-child { margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <span>Умови використання</span>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">📄</div>
+                <span class="section-title">Загальні положення</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Використовуючи застосунок SportForYou, ви погоджуєтесь з цими умовами. Якщо ви не погоджуєтесь, будь ласка, не використовуйте сервіс.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🏋️</div>
+                <span class="section-title">Використання сервісу</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Застосунок надає рекомендації щодо тренувань виключно в інформаційних цілях. Перед початком будь-яких фізичних навантажень рекомендуємо проконсультуватись з лікарем.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">⚠️</div>
+                <span class="section-title">Відповідальність</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Адміністрація не несе відповідальності за можливі травми або шкоду здоров'ю, що можуть виникнути внаслідок виконання тренувань без належного контролю.</p>
+            </div>
+        </div>
+
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🔄</div>
+                <span class="section-title">Зміни умов</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <p>Ми залишаємо за собою право змінювати ці умови в будь-який час. Продовження використання сервісу після змін означає ваше погодження з новими умовами.</p>
+            </div>
+        </div>
+
+        <p style="text-align:center; font-size:11px; color:var(--text-secondary); margin-top:20px; opacity:0.6;">
+            SportForYou · @YourSportsTraining_bot
+        </p>
+
+        <div class="spacer"></div>
+    </div>
+
+    <div class="menu">
+        <a href="Main.html"><button>Головна</button></a>
+        <a href="Create_training.html"><button>Тренування</button></a>
+        <a href="stats.html"><button>Статистика</button></a>
+        <a href="profile.html"><button class="active">Профіль</button></a>
+    </div>
+</body>
+</html>

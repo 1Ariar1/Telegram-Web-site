@@ -3,42 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="icon" type="image/png" href="image/AvatarBot.png">
-    <link rel="stylesheet" href="style/style.css">
     <title>SportForYou — Календар</title>
+    <link rel="icon" type="image/png" href="image/AvatarBot.png">
+    <link rel="stylesheet" href="style/style.css">
 </head>
-
 <body>
-
-<div class="container">
-    <div class="header">
-    <div class="header-icon">
-        <img src="image/AvatarBot.png" alt="Logo">
-    </div>
-    <span class="logo">SportForYou</span>
-</div>
-
-
-    <h2>Календар</h2>
-
-    <div class="card">
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-            <button id="prev" style="width:40px;">‹</button>
-            <span id="monthYear"></span>
-            <button id="next" style="width:40px;">›</button>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">
+                <img src="image/AvatarBot.png" alt="Logo">
+            </div>
+            <span>SportForYou</span>
         </div>
 
-        <table id="calendar"></table>
+        <h2 style="margin-bottom:16px;">Календар</h2>
+
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <button id="prev" style="width:40px; background:var(--card); color:var(--text);
+                    border:1px solid #2C2F4A; border-radius:8px; cursor:pointer; font-size:18px;">‹</button>
+                <span id="monthYear" style="font-weight:600;"></span>
+                <button id="next" style="width:40px; background:var(--card); color:var(--text);
+                    border:1px solid #2C2F4A; border-radius:8px; cursor:pointer; font-size:18px;">›</button>
+            </div>
+            <table id="calendar" style="width:100%; border-collapse:collapse;"></table>
+        </div>
     </div>
 
     <div class="menu">
-    <a href="Main.html"><button>Головна</button></a>
-    <a href="Create_training.html"><button>Тренування</button></a>
-    <a href="stats.html"><button>Статистика</button></a>
-    <a href="profile.html"><button>Профіль</button></a>
-</div>
-</div>
-<script src="script/calendar.js"></script>
+        <a href="Main.html"><button>Головна</button></a>
+        <a href="Create_training.html"><button>Тренування</button></a>
+        <a href="stats.html"><button>Статистика</button></a>
+        <a href="profile.html"><button class="active">Профіль</button></a>
+    </div>
+
+    <script src="script/calendar.js"></script>
 </body>
-                    
+</html>
