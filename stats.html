@@ -6,6 +6,69 @@
     <title>SportForYou — Статистика</title>
     <link rel="icon" type="image/png" href="image/AvatarBot.png">
     <link rel="stylesheet" href="style/style.css">
+    <style>
+        .section-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+            cursor: pointer;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(106, 76, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            flex: 1;
+        }
+        .chevron {
+            font-size: 16px;
+            color: var(--text-secondary);
+            transition: transform 0.3s;
+        }
+        .section-card.open .chevron { transform: rotate(90deg); }
+
+        .section-body {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .section-card.open .section-body { display: block; }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 14px;
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: var(--text-secondary); }
+        .stat-value {
+            font-weight: 600;
+            color: var(--accent);
+            min-width: 30px;
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,29 +79,102 @@
             <span>SportForYou</span>
         </div>
 
-        <select>
-            <option>Калорії</option>
-        </select>
-        <div class="card">
-            Набрано калорій: —<br>
-            Скинуто калорій: —
+        <!-- 1 -->
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🏋️</div>
+                <span class="section-title">Тренування користувача</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <div class="stat-row">
+                    <span class="stat-label">Кількість тренувань</span>
+                    <span class="stat-value" id="user-count">—</span>
+                </div>
+            </div>
         </div>
 
-        <select>
-            <option>Кількість тренувань</option>
-        </select>
-        <div class="card">
-            Складний рівень: —<br>
-            Середній рівень: —<br>
-            Легкий рівень: —
+        <!-- 2 -->
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <span class="section-title">AI тренування — за ціллю</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <div class="stat-row">
+                    <span class="stat-label">Схуднення</span>
+                    <span class="stat-value" id="goal-loss">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Набір маси</span>
+                    <span class="stat-value" id="goal-gain">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Рельєф</span>
+                    <span class="stat-value" id="goal-relief">—</span>
+                </div>
+            </div>
         </div>
 
-        <select>
-            <option>Прогрес</option>
-        </select>
-        <div class="card">
-            Ваш прогрес за місяць: —
+        <!-- 3 -->
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <span class="section-title">AI тренування — за складністю</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <div class="stat-row">
+                    <span class="stat-label">Складний рівень</span>
+                    <span class="stat-value" id="lvl-hard">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Середній рівень</span>
+                    <span class="stat-value" id="lvl-mid">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Легкий рівень</span>
+                    <span class="stat-value" id="lvl-easy">—</span>
+                </div>
+            </div>
         </div>
+
+        <!-- 4 -->
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">📍</div>
+                <span class="section-title">AI тренування — за місцем</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <div class="stat-row">
+                    <span class="stat-label">Вдома</span>
+                    <span class="stat-value" id="place-home">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">В спортзалі</span>
+                    <span class="stat-value" id="place-gym">—</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="section-card" onclick="this.classList.toggle('open')">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <span class="section-title">Прогрес</span>
+                <span class="chevron">›</span>
+            </div>
+            <div class="section-body">
+                <div class="stat-row">
+                    <span class="stat-label">Прогрес за місяць</span>
+                    <span class="stat-value" id="progress">—</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
     </div>
 
     <div class="menu">
@@ -47,5 +183,62 @@
         <a href="stats.html"><button class="active">Статистика</button></a>
         <a href="profile.html"><button>Профіль</button></a>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const history = JSON.parse(localStorage.getItem('workoutHistory')) || [];
+
+            let userCount = 0;
+            let goalLoss = 0, goalGain = 0, goalRelief = 0;
+            let lvlHard = 0, lvlMid = 0, lvlEasy = 0;
+            let placeHome = 0, placeGym = 0;
+
+            const now = new Date();
+            const thisMonth = now.getMonth();
+            const thisYear = now.getFullYear();
+            let monthCount = 0;
+
+            history.forEach(w => {
+                if (w.source === 'user') {
+                    userCount++;
+                } else if (w.source === 'ai') {
+                    if (w.goal === 'схуднення') goalLoss++;
+                    else if (w.goal === 'набір маси') goalGain++;
+                    else if (w.goal === 'рельєф') goalRelief++;
+
+                    if (w.level && w.level.includes('важк')) lvlHard++;
+                    else if (w.level && w.level.includes('середн')) lvlMid++;
+                    else if (w.level && w.level.includes('легк')) lvlEasy++;
+
+                    if (w.place === 'вдома') placeHome++;
+                    else if (w.place === 'в залі') placeGym++;
+                }
+
+                if (w.date) {
+                    const parts = w.date.split('.');
+                    if (parts.length === 3) {
+                        const d = parseInt(parts[0]), m = parseInt(parts[1]) - 1, y = parseInt(parts[2]);
+                        if (m === thisMonth && y === thisYear) monthCount++;
+                    }
+                }
+            });
+
+            const set = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = val > 0 ? val : '—';
+            };
+
+            set('user-count', userCount);
+            set('goal-loss', goalLoss);
+            set('goal-gain', goalGain);
+            set('goal-relief', goalRelief);
+            set('lvl-hard', lvlHard);
+            set('lvl-mid', lvlMid);
+            set('lvl-easy', lvlEasy);
+            set('place-home', placeHome);
+            set('place-gym', placeGym);
+            set('progress', monthCount > 0 ? monthCount + ' тр.' : null);
+        });
+    </script>
 </body>
 </html>
