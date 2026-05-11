@@ -1,68 +1,156 @@
-// 1. Функція копіювання посилання
-function handleInvite(selectElement) {
-    const url = selectElement.value;
-    if (!url) return;
-    navigator.clipboard.writeText(url).then(() => {
-        alert("Посилання скопійовано!");
-    }).catch(() => prompt("Скопіюйте посилання:", url));
-    selectElement.selectedIndex = 0;
-}
+const API_KEY = 'AIzaSyANCxDaaBGnVz6Zyf5Mg_DGL5Qt5yzW-pQ';
 
-// 2. Функція ручного завантаження фото
-function uploadPhoto(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const avatarImg = document.getElementById('user-avatar');
-            const container = document.getElementById('avatar-container');
-            
-            // Якщо була літера — замінюємо назад на тег img
-            container.innerHTML = `<img src="${e.target.result}" class="avatar-profile" id="user-avatar" alt="Avatar">`;
-            
-            // Зберігаємо в пам'ять
-            localStorage.setItem('userCustomPhoto', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-// 3. Завантаження даних
-document.addEventListener('DOMContentLoaded', function() {
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
-
-    // Дата
-    const dateElement = document.getElementById('current-date');
-    if (dateElement) {
-        dateElement.textContent = new Date().toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' });
+document.addEventListener('DOMContentLoaded', function () {
+    // Підключення Telegram WebApp
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.ready();
     }
 
-    const user = tg.initDataUnsafe?.user;
-    const avatarImg = document.getElementById('user-avatar');
-    const nameElement = document.getElementById('display-name');
-    const avatarContainer = document.getElementById('avatar-container');
-
-    
-    
-    const savedPhoto = localStorage.getItem('userCustomPhoto');
-    const firstName = user?.first_name || localStorage.getItem('userName') || "Користувач";
-
-    if (nameElement) nameElement.innerText = firstName;
-
-    if (savedPhoto) {
-        avatarImg.src = savedPhoto;
-    } else if (user && user.photo_url) {
-        avatarImg.src = user.photo_url;
-    } else {
-        const firstLetter = firstName.charAt(0).toUpperCase();
-        avatarContainer.innerHTML = `<div class="avatar-placeholder">${firstLetter}</div>`;
-    }
-
-    // Завантаження решти полів
-    const dataMap = { 'userAge': 'display-age', 'userGender': 'display-gender', 'userWeight': 'display-weight', 'userActivity': 'display-activity' };
-    for (const [key, id] of Object.entries(dataMap)) {
-        const val = localStorage.getItem(key);
-        if (val) document.getElementById(id).textContent = val;
+    // Синхронізація аватара (якщо елемент є на сторінці)
+    const mainAvatar = document.getElementById('main-avatar');
+    if (mainAvatar) {
+        const savedPhoto = localStorage.getItem('userCustomPhoto');
+        const tgPhoto = window.Telegram?.WebApp?.initDataUnsafe?.user?.photo_url;
+        if (savedPhoto) mainAvatar.src = savedPhoto;
+        else if (tgPhoto) mainAvatar.src = tgPhoto;
     }
 });
+
+// Поточне згенероване тренування
+let currentGeneratedWorkout = null;
+
+async function generateWithAI() {
+    const goal  = document.getElementById('ai-goal').value;
+    const level = document.getElementById('ai-level').value;
+    const place = document.getElementById('ai-place').value;
+
+    const btn       = document.getElementById('gen-btn');
+    const resultBox = document.getElementById('result-box');
+    const resultText = document.getElementById('result-text');
+    const spinner   = document.getElementById('loading-spinner');
+
+    // Блокуємо кнопку та показуємо спінер
+    btn.disabled = true;
+    btn.innerText = '⏳ Генерація...';
+    resultBox.style.display = 'block';
+    spinner.style.display = 'block';
+    resultText.innerText = '';
+
+    // Кнопка збереження — створюємо один раз
+    let saveBtn = document.getElementById('save-ai-btn');
+    if (!saveBtn) {
+        saveBtn = document.createElement('button');
+        saveBtn.id = 'save-ai-btn';
+        saveBtn.className = 'menu-btn';
+        saveBtn.style.cssText = `
+            background: #2ecc71;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius, 14px);
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        `;
+        saveBtn.innerText = '💾 Додати до моїх тренувань';
+        saveBtn.onclick = saveAiWorkoutToSystem;
+        resultBox.appendChild(saveBtn);
+    }
+    saveBtn.style.display = 'none';
+
+    // Промпт до Gemini
+    const prompt = `Склади тренування українською мовою.
+Ціль: ${goal}
+Складність: ${level}
+Місце: ${place}
+
+Напиши рівно 5-6 вправ у форматі:
+Назва вправи — X підходів x Y повторень
+
+Без вступу, без пояснень, тільки список вправ.`;
+
+    try {
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 512
+                    }
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        // Обробка помилок API
+        if (data.error) {
+            throw new Error(data.error.message || 'Помилка API Gemini');
+        }
+
+        if (!data.candidates || data.candidates.length === 0) {
+            throw new Error('AI не повернув результат. Спробуйте ще раз.');
+        }
+
+        const aiResponse = data.candidates[0].content.parts[0].text.trim();
+
+        spinner.style.display = 'none';
+        resultText.innerText = aiResponse;
+        saveBtn.style.display = 'block';
+
+        // Зберігаємо дані тренування включно з goal/level/place для статистики
+        currentGeneratedWorkout = {
+            id: Date.now(),
+            name: `AI: ${goal}`,
+            exercises: aiResponse,
+            source: 'ai',
+            goal: goal,
+            level: level,
+            place: place,
+            isCompleted: false
+        };
+
+    } catch (error) {
+        spinner.style.display = 'none';
+
+        // Зрозумілі повідомлення про помилки
+        let msg = error.message;
+        if (msg.includes('API key')) msg = 'Невірний API ключ Gemini.';
+        else if (msg.includes('quota'))  msg = 'Перевищено ліміт запитів. Спробуйте пізніше.';
+        else if (msg.includes('network') || msg.includes('fetch')) msg = 'Немає зʼєднання з інтернетом.';
+
+        resultText.innerHTML = `<span style="color:#ff6b6b;">⚠️ ${msg}</span>`;
+        console.error('AI Error:', error);
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Згенерувати через AI ✨';
+    }
+}
+
+function saveAiWorkoutToSystem() {
+    if (!currentGeneratedWorkout) return;
+
+    const STORAGE_KEY = 'userWorkouts';
+    let allWorkouts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+    // Перевірка на дублікат (якщо натиснули двічі)
+    const alreadySaved = allWorkouts.some(w => w.id === currentGeneratedWorkout.id);
+    if (alreadySaved) {
+        alert('Це тренування вже збережено!');
+        window.location.href = 'Create_training.html';
+        return;
+    }
+
+    allWorkouts.push(currentGeneratedWorkout);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allWorkouts));
+
+    alert('✅ AI тренування збережено!');
+    window.location.href = 'Create_training.html';
+}
