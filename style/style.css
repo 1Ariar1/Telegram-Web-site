@@ -257,3 +257,12 @@ input[type=number] { -moz-appearance: textfield; }
     color: white !important;
     box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
 }
+
+.back-btn {
+            width: 36px; height: 36px;
+            background: var(--card); border: none; border-radius: 50%;
+            cursor: pointer; color: var(--text); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: background 0.2s;
+        }
+.back-btn:hover { background: var(--accent); }
